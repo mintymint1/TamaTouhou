@@ -1,0 +1,63 @@
+# Push a tag like v0.2.0 (matching TAMA_VERSION in firmware/lib/engine/version.h) to:
+#   1. build the firmware and the art,
+#   2. attach the images, flash.sh and SHA256SUMS to a GitHub release,
+#   3. publish the web flasher (web/) with this firmware to GitHub Pages.
+# One-time setup: Settings > Pages > Source: "GitHub Actions".
+name: Release
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:   # republish the flasher for the current commit, without a release
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/cache@v4
+        with:
+          path: ~/.platformio
+          key: pio-${{ hashFiles('firmware/platformio.ini') }}
+      - name: Tag matches the version
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          want="$(sed -n 's/#define TAMA_VERSION "\(.*\)"/\1/p' firmware/lib/engine/version.h)"
+          [ "v$want" = "$GITHUB_REF_NAME" ] || { echo "tag $GITHUB_REF_NAME != version v$want"; exit 1; }
+      - name: Tests
+        run: make check
+      - name: Build firmware + web flasher files
+        run: make release
+      - name: GitHub release
+        if: startsWith(github.ref, 'refs/tags/')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cd web/firmware
+          zip -q "../tamatouhou-$GITHUB_REF_NAME.zip" *
+          gh release create "$GITHUB_REF_NAME" --title "$GITHUB_REF_NAME" --generate-notes \
+            "../tamatouhou-$GITHUB_REF_NAME.zip" *.bin flash.sh SHA256SUMS manifest.json
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: web
+
+  pages:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - id: deploy
+        uses: actions/deploy-pages@v4

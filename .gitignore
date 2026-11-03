@@ -1,0 +1,15 @@
+.DS_Store
+__pycache__/
+.venv/
+
+# build outputs
+firmware/.pio/
+firmware/.deps/
+firmware/data/
+firmware/sim/build/
+firmware/sim/save/
+firmware/test/host/build/
+web/firmware/
+
+# exported saves
+*.tamasave

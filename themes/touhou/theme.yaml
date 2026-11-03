@@ -1,0 +1,57 @@
+# Touhou Project theme pack: manifest (format: docs/themes.md)
+# Gameplay data lives here and in roster.yaml.
+
+id: touhou
+name: "Touhou Project"
+version: 1
+engine_api: 1
+
+vocabulary:
+  egg: "YIN-YANG ORB"
+  collection: "GENSOKYO CHRONICLE"
+  variant: "ALT COLOR"
+  evolve_verb: "AWAKEN"
+  needs: [FOOD, FUN, POWER, TIDY]          # food / joy / energy / hygiene
+  foods: ["POWER ITEM", "POINT ITEM", "FAITH ITEM"]
+  treat: "DANGO"
+  clean_action: "BOMB!"
+  storage: "THE GAP"           # where kept creatures wait (Yukari's gaps); engine term: storage
+  keepsake: "KEEPSAKE"         # the previous form kept when a pet evolves
+
+# Rarity tiers are data-driven (docs/themes.md). Rolled rarest first; the first that
+# hits wins. odds are percentages; blessed_odds apply after a farewell; the last tier
+# catches the rest. Streak/bond bonuses scale every odds value (engine-capped).
+rarity_tiers:
+  - { id: mythic,    odds: 1.0, blessed_odds: 2.5, unlock_collected: 30, hint: "PROTAGONIST?!" }   # Reimu, Marisa
+  - { id: legendary, odds: 4.0, blessed_odds: 10,  unlock_collected: 10, hint: "LEGENDARY" }
+  - { id: rare,      odds: 25,  blessed_odds: 40,  unlock_collected: 0,  hint: "RARE" }
+  - { id: common,    odds: rest }
+
+palette:
+  bg_day: "#f4ecdc"          # washi paper
+  bg_night: "#14111f"
+  ink: "#3a2626"
+  ink_night: "#e8dcf0"
+  bar_ok: "#4caf50"
+  bar_warn: "#f2b632"
+  bar_bad: "#d8283a"
+  track: "#ddd0bb"
+  accent_default: "#c8283a"  # shrine red
+  clean_fx: "#ffffff"        # bomb flash
+
+habitats:                    # bitmap backgrounds (backgrounds/<id>.png, 232x156 drawn at 2x)
+  - { id: hakurei_shrine,  sky: none, ground_y: 304 }
+  - { id: forest_of_magic, sky: none, ground_y: 304 }
+  - { id: misty_lake,      sky: none, ground_y: 304 }
+  - { id: scarlet_mansion, sky: none, ground_y: 304 }
+  - { id: netherworld,     sky: none, ground_y: 304 }
+  - { id: bamboo_forest,   sky: none, ground_y: 304 }
+  - { id: youkai_mountain, sky: none, ground_y: 304 }
+  - { id: former_hell,     sky: none, ground_y: 304 }
+  - { id: human_village,   sky: none, ground_y: 304 }
+
+tunables:
+  variant_odds: 48
+  farewell_age_days: 3
+
+starters: [ice_fairy, kitten, umbrella]

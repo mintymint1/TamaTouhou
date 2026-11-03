@@ -1,0 +1,27 @@
+frame:
+- 92
+- 92
+idle:
+  fps: 5
+walk:
+  fps: 10
+happy:
+  fps: 10
+  frame:
+  - 104
+  - 104
+sleep:
+  fps: 2
+  frame:
+  - 104
+  - 104
+eat:
+  fps: 8
+  frame:
+  - 104
+  - 104
+sad:
+  fps: 4
+  frame:
+  - 104
+  - 104

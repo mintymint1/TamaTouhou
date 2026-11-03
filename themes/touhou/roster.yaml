@@ -1,0 +1,191 @@
+# Touhou roster: 48 species (format: docs/themes.md)
+# Tiers: common (animal/object/fairy -> youkai lines), rare, legendary, mythic (Reimu, Marisa).
+# Evolution = "long-lived animals and abandoned objects become youkai".
+# ids must match sprite folders: sprites/<id>/. Variants = ALT COLOR palette swaps (tools/variants.py).
+
+# ===================================================================== common lines
+- id: ice_fairy
+  name: "ICE FAIRY"
+  rarity: common
+  habitat: misty_lake
+  accent: "#5aa8e0"
+  variant: { hue_shift: 300, protect_skin: true }
+  evolves: [{ to: cirno, level: 16 }]
+- id: cirno
+  name: "CIRNO"
+  rarity: evo
+  habitat: misty_lake
+  accent: "#3f8fe0"
+  variant: { hue_shift: 300, protect_skin: true }
+  evolves: [{ to: tanned_cirno, level: 30 }]
+- { id: tanned_cirno, name: "TANNED CIRNO", rarity: evo, habitat: misty_lake, accent: "#3f8fe0", variant: { hue_shift: 300, protect_skin: true } }
+
+- id: kitten
+  name: "KITTEN"
+  rarity: common
+  habitat: human_village
+  accent: "#a0704a"
+  variant: { hue_shift: 180 }
+  evolves:                                 # branch: prefers whichever isn't collected yet
+    - { to: chen, level: 16 }
+    - { to: orin, level: 16 }
+- { id: chen, name: "CHEN", rarity: evo, habitat: youkai_mountain, accent: "#d0403a", variant: { hue_shift: 150, protect_skin: true } }
+- { id: orin, name: "ORIN", rarity: evo, habitat: former_hell,     accent: "#c8283a", variant: { hue_shift: 200, protect_skin: true } }
+
+- id: fox_kit
+  name: "FOX KIT"
+  rarity: common
+  habitat: youkai_mountain
+  accent: "#e0a030"
+  variant: { hue_shift: 200 }
+  evolves: [{ to: ran, level: 30 }]
+- { id: ran, name: "RAN", rarity: evo, habitat: youkai_mountain, accent: "#e0a030", variant: { hue_shift: 200, protect_skin: true } }
+
+- id: crow_chick
+  name: "CROW CHICK"
+  rarity: common
+  habitat: youkai_mountain
+  accent: "#505070"
+  variant: { hue_shift: 180 }
+  evolves:
+    - { to: aya, level: 20 }
+    - { to: okuu, level: 20 }
+- { id: aya,  name: "AYA",  rarity: evo, habitat: youkai_mountain, accent: "#c8283a", variant: { hue_shift: 200, protect_skin: true } }
+- { id: okuu, name: "OKUU", rarity: evo, habitat: former_hell,     accent: "#3a9a4a", variant: { hue_shift: 160, protect_skin: true } }
+
+- id: rabbit
+  name: "RABBIT"
+  rarity: common
+  habitat: bamboo_forest
+  accent: "#d8a0b0"
+  variant: { hue_shift: 120 }
+  evolves:
+    - { to: tewi, level: 16 }
+    - { to: reisen, level: 16 }
+- { id: tewi,   name: "TEWI",   rarity: evo, habitat: bamboo_forest, accent: "#e080a0", variant: { hue_shift: 150, protect_skin: true } }
+- { id: reisen, name: "REISEN", rarity: evo, habitat: bamboo_forest, accent: "#9a78d0", variant: { hue_shift: 120, protect_skin: true } }
+
+- id: tanuki
+  name: "TANUKI"
+  rarity: common
+  habitat: human_village
+  accent: "#8a6a4a"
+  variant: { hue_shift: 180 }
+  evolves: [{ to: mamizou, level: 24 }]
+- { id: mamizou, name: "MAMIZOU", rarity: evo, habitat: human_village, accent: "#8a6a4a", variant: { hue_shift: 180, protect_skin: true } }
+
+- id: umbrella
+  name: "OLD UMBRELLA"
+  rarity: common
+  habitat: human_village
+  accent: "#8a5ab0"
+  variant: { hue_shift: 120 }
+  evolves: [{ to: kogasa, level: 16 }]
+- { id: kogasa, name: "KOGASA", rarity: evo, habitat: human_village, accent: "#4a7ad0", variant: { hue_shift: 120, protect_skin: true } }
+
+- id: old_doll
+  name: "OLD DOLL"
+  rarity: common
+  habitat: forest_of_magic
+  accent: "#c84a4a"
+  variant: { hue_shift: 200, protect_skin: true }
+  evolves: [{ to: medicine, level: 16 }]
+- { id: medicine, name: "MEDICINE", rarity: evo, habitat: forest_of_magic, accent: "#c84a4a", variant: { hue_shift: 200, protect_skin: true } }
+
+- id: sparrow
+  name: "SPARROW"
+  rarity: common
+  habitat: bamboo_forest
+  accent: "#a0704a"
+  variant: { hue_shift: 180 }
+  evolves: [{ to: mystia, level: 16 }]
+- { id: mystia, name: "MYSTIA", rarity: evo, habitat: bamboo_forest, accent: "#d070a0", variant: { hue_shift: 150, protect_skin: true } }
+
+- id: firefly
+  name: "FIREFLY"
+  rarity: common
+  habitat: forest_of_magic
+  accent: "#7ac040"
+  variant: { hue_shift: 200 }
+  evolves: [{ to: wriggle, level: 16 }]
+- { id: wriggle, name: "WRIGGLE", rarity: evo, habitat: forest_of_magic, accent: "#4aa050", variant: { hue_shift: 200, protect_skin: true } }
+
+- id: mouse
+  name: "MOUSE"
+  rarity: common
+  habitat: human_village
+  accent: "#8a8a9a"
+  variant: { hue_shift: 30 }
+  evolves: [{ to: nazrin, level: 16 }]
+- { id: nazrin, name: "NAZRIN", rarity: evo, habitat: human_village, accent: "#8a8a9a", variant: { hue_shift: 240, protect_skin: true } }
+
+- id: wolf_pup
+  name: "WOLF PUP"
+  rarity: common
+  habitat: bamboo_forest
+  accent: "#7a5a4a"
+  variant: { hue_shift: 200 }
+  evolves: [{ to: kagerou, level: 20 }]
+- { id: kagerou, name: "KAGEROU", rarity: evo, habitat: bamboo_forest, accent: "#a03a3a", variant: { hue_shift: 200, protect_skin: true } }
+
+- id: noh_mask
+  name: "NOH MASK"
+  rarity: common
+  habitat: human_village
+  accent: "#d0a080"
+  variant: { hue_shift: 150 }
+  evolves: [{ to: kokoro, level: 20 }]
+- { id: kokoro, name: "KOKORO", rarity: evo, habitat: human_village, accent: "#e080b0", variant: { hue_shift: 150, protect_skin: true } }
+
+- id: darkness
+  name: "DARKNESS"
+  rarity: common
+  habitat: misty_lake
+  accent: "#504060"
+  variant: { hue_shift: 180 }
+  evolves: [{ to: rumia, level: 16 }]
+- { id: rumia, name: "RUMIA", rarity: evo, habitat: misty_lake, accent: "#d0a030", variant: { hue_shift: 200, protect_skin: true } }
+
+- id: phantom
+  name: "PHANTOM"
+  rarity: common
+  habitat: netherworld
+  accent: "#a0c8e0"
+  variant: { hue_shift: 150 }
+  evolves: [{ to: youmu, level: 24 }]
+- { id: youmu, name: "YOUMU", rarity: evo, habitat: netherworld, accent: "#4a9a5a", variant: { hue_shift: 200, protect_skin: true } }
+
+# ===================================================================== rare (single stage)
+- { id: meiling,   name: "MEILING",   rarity: rare, habitat: scarlet_mansion, accent: "#3a9a4a", variant: { hue_shift: 200, protect_skin: true } }
+- { id: patchouli, name: "PATCHOULI", rarity: rare, habitat: scarlet_mansion, accent: "#8a5ab0", variant: { hue_shift: 150, protect_skin: true } }
+- { id: alice,     name: "ALICE",     rarity: rare, habitat: forest_of_magic, accent: "#4a7ad0", variant: { hue_shift: 150, protect_skin: true } }
+- { id: sanae,     name: "SANAE",     rarity: rare, habitat: youkai_mountain, accent: "#3aa060", variant: { hue_shift: 150, protect_skin: true } }
+- { id: nitori,    name: "NITORI",    rarity: rare, habitat: youkai_mountain, accent: "#3a8ad0", variant: { hue_shift: 150, protect_skin: true } }
+
+# ===================================================================== legendary (single stage)
+- { id: sakuya,  name: "SAKUYA",  rarity: legendary, habitat: scarlet_mansion, accent: "#5a6ac8", variant: { hue_shift: 150, protect_skin: true } }
+- { id: remilia, name: "REMILIA", rarity: legendary, habitat: scarlet_mansion, accent: "#c8283a", variant: { hue_shift: 180, protect_skin: true } }
+- { id: flandre, name: "FLANDRE", rarity: legendary, habitat: scarlet_mansion, accent: "#e0303a", variant: { hue_shift: 180, protect_skin: true } }
+- { id: yuyuko,  name: "YUYUKO",  rarity: legendary, habitat: netherworld,     accent: "#e080a0", variant: { hue_shift: 150, protect_skin: true } }
+- { id: yukari,  name: "YUKARI",  rarity: legendary, habitat: hakurei_shrine,  accent: "#8a4ab0", variant: { hue_shift: 150, protect_skin: true } }
+- { id: satori,  name: "SATORI",  rarity: legendary, habitat: former_hell,     accent: "#e070a0", variant: { hue_shift: 150, protect_skin: true } }
+- { id: koishi,  name: "KOISHI",  rarity: legendary, habitat: former_hell,     accent: "#5ab070", variant: { hue_shift: 150, protect_skin: true } }
+
+# ===================================================================== mythic: the protagonists
+# Shinies: hand-picked PC-98 palette_maps (colours from `tools/variants.py touhou --palette <id>`).
+- id: reimu
+  name: "REIMU"
+  rarity: mythic
+  habitat: hakurei_shrine
+  accent: "#d8283a"
+  variant:          # PC-98 Reimu: purple hair, outfit unchanged
+    palette_map: { "#6f4a49": "#7a4a9a", "#512c2f": "#55306e", "#221918": "#2a1a3a" }
+    tolerance: 28
+- id: marisa
+  name: "MARISA"
+  rarity: mythic
+  habitat: forest_of_magic
+  accent: "#e0b030"
+  variant:          # PC-98 Marisa: purple hat and dress, blonde hair and white apron unchanged
+    palette_map: { "#2c2933": "#5b2d8c", "#27252f": "#4e2679", "#35313b": "#6b3aa0", "#0a0820": "#2a0d45" }
+    tolerance: 24

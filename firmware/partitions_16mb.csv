@@ -1,0 +1,14 @@
+# 16 MB flash: one 3 MB app slot + ~12.9 MB LittleFS for theme assets (sprites, backgrounds).
+# No OTA (updates go over USB): the bootloader runs the factory app.
+# NVS is 24 KB: the pet blob (~1.4 KB) + storage blob (up to ~6.7 KB) need free space to be
+# rewritten.
+# otadata exists only to give PlatformIO's boot_app0.bin (always written by `pio run -t
+# upload`) a place of its own. By default it lands at 0xe000, which is inside NVS and would
+# corrupt the save on every flash; platformio.ini points it here instead
+# (board_upload.arduino.boot_app0). With no ota_N slots the bootloader still runs app0.
+# Name,    Type, SubType,  Offset,   Size
+nvs,       data, nvs,      0x9000,   0x6000
+app0,      app,  factory,  0x10000,  0x300000
+spiffs,    data, littlefs, 0x310000, 0xCDE000
+otadata,   data, ota,      0xFEE000, 0x2000
+coredump,  data, coredump, 0xFF0000, 0x10000

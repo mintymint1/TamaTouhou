@@ -1,0 +1,50 @@
+# Every push and pull request: theme validation, generated files up to date, host tests (with
+# sanitizers), the simulator build, and the board build.
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Theme + generated files + tests
+        run: make check
+      - name: Tests with AddressSanitizer + UBSan
+        run: make -C firmware/test/host asan
+
+  simulator:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/cache@v4
+        with:
+          path: firmware/.deps
+          key: sdl3-3.4.18
+      - name: Build the simulator
+        run: |
+          make data
+          make -C firmware/sim
+
+  board:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/cache@v4
+        with:
+          path: ~/.platformio
+          key: pio-${{ hashFiles('firmware/platformio.ini') }}
+      - name: Build firmware + web flasher files
+        run: make release

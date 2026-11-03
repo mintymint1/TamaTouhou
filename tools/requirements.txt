@@ -1,0 +1,7 @@
+# Theme tools (build_theme, variants, sprite_qa, theme_status)
+pillow>=10
+pyyaml>=6
+# board_save.py (save backup over USB)
+pyserial>=3.5
+# Board builds (make board / flash / release)
+platformio>=6.1

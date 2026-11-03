@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TamaTouhou Web Flasher</title>
+  <meta name="description" content="Install the virtual pet on a Waveshare ESP32-S3-Touch-AMOLED-1.75 from your browser. No software to install.">
+  <link rel="icon" href="starter.png">
+  <!-- ESP Web Tools (Apache-2.0, https://esphome.github.io/esp-web-tools/): flashes over Web Serial. -->
+  <script type="module" src="https://unpkg.com/esp-web-tools@10.4.0/dist/web/install-button.js?module"></script>
+  <style>
+    :root {
+      --bg: #f4ecdc;
+      --card: #fffaf0;
+      --ink: #3a2626;
+      --muted: #7a6660;
+      --line: #ddd0bb;
+      --accent: #c8283a;
+      --accent-ink: #ffffff;
+      --warn-bg: #fff3d6;
+      --warn-line: #f2b632;
+      color-scheme: light;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #14111f;
+        --card: #1e1a2c;
+        --ink: #e8dcf0;
+        --muted: #a898b8;
+        --line: #352e48;
+        --accent: #e0455a;
+        --accent-ink: #ffffff;
+        --warn-bg: #2a2416;
+        --warn-line: #b8891f;
+        color-scheme: dark;
+      }
+    }
+    :root[data-theme="dark"] {
+      --bg: #14111f; --card: #1e1a2c; --ink: #e8dcf0; --muted: #a898b8; --line: #352e48;
+      --accent: #e0455a; --accent-ink: #ffffff; --warn-bg: #2a2416; --warn-line: #b8891f;
+      color-scheme: dark;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    }
+    main { max-width: 760px; margin: 0 auto; padding: 40px 16px 64px; }
+    header { display: flex; gap: 28px; align-items: center; flex-wrap: wrap; }
+    header img { width: 180px; height: 180px; image-rendering: pixelated; flex: none; }
+    h1 { font-size: 2rem; line-height: 1.15; margin: 0 0 8px; }
+    h2 { font-size: 1.15rem; margin: 36px 0 12px; }
+    p { margin: 0 0 12px; }
+    .lead { color: var(--muted); margin: 0; }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 20px;
+      margin-top: 28px;
+    }
+    .install { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+    .install .version { color: var(--muted); font-size: .9rem; }
+    esp-web-install-button button, .btn {
+      appearance: none;
+      border: 0;
+      border-radius: 10px;
+      background: var(--accent);
+      color: var(--accent-ink);
+      font: 600 1.05rem/1 system-ui, sans-serif;
+      padding: 14px 26px;
+      cursor: pointer;
+    }
+    esp-web-install-button button:hover, .btn:hover { filter: brightness(1.08); }
+    .notice {
+      background: var(--warn-bg);
+      border: 1px solid var(--warn-line);
+      border-radius: 10px;
+      padding: 12px 14px;
+    }
+    ol, ul { padding-left: 1.3em; margin: 0; }
+    li { margin: 6px 0; }
+    code {
+      font: .9em ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      background: var(--line);
+      border-radius: 5px;
+      padding: 1px 5px;
+    }
+    a { color: var(--accent); }
+    footer { margin-top: 48px; color: var(--muted); font-size: .9rem; }
+    @media (max-width: 520px) {
+      header img { width: 140px; height: 140px; }
+      h1 { font-size: 1.6rem; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <img src="main.png" alt="The game's main screen: a pet in its habitat with its four need bars and the feed, play, sleep and clean buttons">
+    <div>
+      <h1>TamaTouhou</h1>
+      <p class="lead">A virtual pet for the round Waveshare ESP32-S3-Touch-AMOLED-1.75. Plug the board in, click Install, done. Free and open source.</p>
+    </div>
+  </header>
+
+  <section class="card install">
+    <esp-web-install-button manifest="firmware/manifest.json">
+      <button slot="activate">Install on my board</button>
+      <div slot="unsupported" class="notice">
+        This browser can't talk to USB devices. Use <strong>Chrome</strong> or <strong>Edge</strong> on a computer
+        (Windows, macOS, Linux or ChromeOS), or Chrome on Android with a USB-C cable.
+        Firefox and Safari don't support Web Serial.
+      </div>
+      <div slot="not-allowed" class="notice">
+        The flasher needs a secure page. Open it over <code>https://</code> (or on <code>localhost</code>).
+      </div>
+    </esp-web-install-button>
+    <span class="version" id="version">Loading the firmware version…</span>
+  </section>
+
+  <h2>How to install</h2>
+  <ol>
+    <li>Connect the board to this computer with a USB-C <strong>data</strong> cable (some cables only charge).</li>
+    <li>Click <strong>Install on my board</strong> and pick the port that appears (often <code>USB JTAG/serial debug unit</code> or <code>ESP32-S3</code>).</li>
+    <li>First install: tick <strong>Erase device</strong>. Updating: leave it unticked to keep your pet.</li>
+    <li>Wait 2–4 minutes while it writes the game and the art. The board restarts by itself when it's done.</li>
+  </ol>
+
+  <h2>If something goes wrong</h2>
+  <ul>
+    <li><strong>No port in the list:</strong> unplug the board, hold its <strong>BOOT</strong> button, plug it back in, then let go. Try again.</li>
+    <li><strong>Still nothing:</strong> try another cable or USB port. On Linux, add yourself to the <code>dialout</code> group.</li>
+    <li><strong>It stopped halfway:</strong> just run the install again. Nothing on the board can break from a failed flash.</li>
+    <li><strong>Screen stays black after flashing:</strong> unplug the board and plug it back in. With a battery fitted, hold <strong>PWR</strong> for 4 seconds to switch it off, then press it again.</li>
+    <li><strong>No Chrome or Edge?</strong> Download the files from the <a href="https://github.com/mintymint1/TamaTouhou/releases/latest">latest release</a> and run <code>flash.sh</code> with <a href="https://docs.espressif.com/projects/esptool/">esptool</a>.</li>
+  </ul>
+
+  <h2>Before you update</h2>
+  <p>Updates keep your pet as long as <strong>Erase device</strong> stays unticked. To be extra safe, back up the save first:
+    <code>python tools/board_save.py export my-pet.tamasave</code> (see the <a href="https://github.com/mintymint1/TamaTouhou/blob/main/docs/flashing.md">flashing guide</a>).</p>
+
+  <h2>Next</h2>
+  <ul>
+    <li><a href="https://github.com/mintymint1/TamaTouhou/blob/main/docs/how-to-play.md">How to play</a>: needs, eggs, evolution and the collection.</li>
+    <li><a href="https://github.com/mintymint1/TamaTouhou">Source code</a>, issues and how to contribute.</li>
+  </ul>
+
+  <footer>
+    Unofficial fan work. Touhou Project belongs to ZUN / Team Shanghai Alice. Not affiliated with Bandai or Waveshare.
+    Code MIT, art CC BY-NC 4.0.
+  </footer>
+</main>
+<script>
+  fetch('firmware/manifest.json')
+    .then(r => r.ok ? r.json() : Promise.reject(r.status))
+    .then(m => { document.getElementById('version').textContent = `Version ${m.version} · ${m.name}`; })
+    .catch(() => { document.getElementById('version').textContent = 'No firmware published yet: run "make release" first.'; });
+</script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+# English overrides of engine string IDs (format: docs/themes.md).
+# Placeholders: {egg} {collection} {evolve_verb} {name} {n}. Anything not listed uses the engine default.
+
+S_HAPPY: "Peaceful~"
+S_HUNGRY: "Hungry..."
+S_NEEDS_CLEAN: "Bullets everywhere!"
+S_EXHAUSTED: "Out of power..."
+S_SAD: "Lonely..."
+S_CHUBBY: "Too much dango"
+S_EATING: "Munch munch"
+S_LIKES: "Favourite item!"
+S_IS_VARIANT: "Alt color!"
+S_CLEANING: "BOMB!"
+
+S_EGG_HDR: "{egg}"
+S_EGG_TOUCH: "Tap the {egg}"
+S_EGG_MOVES: "The orb is spinning..."
+S_EGG_ALMOST: "It's cracking!"
+S_EGG_RARE: "RARE"
+S_EGG_LEGEND: "LEGENDARY"
+S_EGG_MYTHIC: "PROTAGONIST?!"
+S_COLLECTION_FMT: "CHRONICLE {n}/48"
+
+S_EVO_TAP: "{evolve_verb}!"
+S_EVO_Q: "{name} wants to {evolve_verb}"
+S_EVO_KEEP: "Not yet"
+
+S_FAREWELL: "Off on a new adventure"
+S_FAREWELL_BTN: "{name} wants to explore"
+S_FAR_Q: "Let {name} go?"
+S_FAR_GO: "See you!"
+S_FAR_STAY: "Stay a while"
+S_RUNAWAY: "INCIDENT!"
+S_RUNAWAY_BTN: "{name} is causing an incident!"
+S_GOODBYE: "Returned to Gensokyo"
+S_RELEASE_FMT: "Release {name}?"
+
+S_CHOOSE_STARTER: "Choose your partner"
+S_MEDAL_BANNER: "SPELL CARD GET!"
+S_STREAK_DAYS_FMT: "{n}-day shrine visit streak!"
+
+# --- storage: "THE GAP" (docs/design.md §4)
+# Placeholders: {name} the creature, {other} the second creature, {n} a number, {max} a maximum.
+S_STORAGE_EMPTY: "Nothing in the Gap yet"
+S_KEEPSAKE_GOT: "{name} left a keepsake in the Gap"
+S_STORAGE_FULL: "The Gap is full"
+S_KEPT_FROM: "Keepsake of {name}"
+S_ORIGIN_HATCHED: "Hatched"
+S_SWITCH_BTN: "SWITCH"
+S_SWITCH_Q: "Send {name} to the Gap and bring out {other}?"
+S_STORE_BTN: "To the Gap"
+S_STORE_Q: "Send {name} to the Gap and start a new orb?"
+# store + new orb: earned by awakening it, or (nothing left to awaken into) time together
+S_STORE_NOT_AWAKENED: "{evolve_verb} {name} first"
+S_STORE_CARE_LEFT: "Ready for the Gap in {name}"
+S_REPLACE_Q: "Replace the {name} already in the Gap (Lv {n})?"
+S_RELEASE_STORED_Q: "Release {name} from the Gap?"
+S_HATCH_FIRST: "Hatch the orb first"
+S_SG_WITH_YOU: "PARTNER"
+S_SG_ACTIVE_HINT: "{name} is by your side"
+S_CH_NOT_STORED: "Not in the Gap"
+S_CH_HOLD_HINT: "Hold to bring out"
+S_ST_ALL_FORMS: "All forms collected"
+
+# --- Status screen and milestones (engine MilestoneKind -> label)
+S_PAGE_NEXT: "NEXT UP"
+S_PAGE_CARE: "CARE"
+S_PAGE_GROWTH: "GROWTH"
+S_PAGE_BOND: "BOND & STREAK"
+S_PAGE_COLLECTION: "COLLECTION"
+S_MS_HATCH: "Hatching"
+S_MS_LEVEL: "Lv {n}"
+S_MS_EVOLVE: "{evolve_verb} at Lv {n}"
+S_MS_FAREWELL: "Ready to explore"
+S_MS_STREAK: "{n}-day shrine visits"
+S_MS_BOND: "Max bond"
+S_MS_MEDAL: "Lv {n} spell card"
+S_MS_TIER: "{tier} orbs unlock"
+S_MS_COLLECTION: "Gap {n}/{max}"
+S_MS_BLOCK_NEEDS: "needs all 40+"
+S_MS_BLOCK_ASLEEP: "asleep"
+S_MS_SOON: "now!"
+
+# --- first-run swipe hints (Main screen edges)
+S_HINT_UP: "Status"
+S_HINT_LEFT: "The Gap"
+S_HINT_RIGHT: "Chronicle"
+S_HINT_DOWN: "Settings"
+
+# --- progression (docs/design.md §7): normal Chronicle, then ALT COLORs,
+# then the player picks any orb
+S_PHASE_VARIANT: "Chronicle done! ALT COLORS next"
+S_PHASE_COMPLETE: "All of Gensokyo! Pick any orb"
+S_ST_PHASE_DONE: "{collection} complete!"
+S_PICK_EGG: "Choose your next orb"
+S_PICK_NORMAL: "NORMAL"
+S_PICK_HATCH: "HATCH"
