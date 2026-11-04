@@ -17,7 +17,7 @@ void Pet::save() {
   pendingSave_ = false;
   uint8_t buf[kSaveMax];
   size_t n = writeState(buf, sizeof(buf));
-  if (n) kv_.putBytes(kSaveKey, buf, n);
+  if (n && !kv_.putBytes(kSaveKey, buf, n)) pendingSave_ = true;   // retried by flushSave()
 }
 
 size_t Pet::writeState(uint8_t *buf, size_t cap) {

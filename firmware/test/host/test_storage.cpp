@@ -299,6 +299,29 @@ TEST(storage_survives_a_reboot) {
   CHECK_EQ(p.levelOf(k), 16);
 }
 
+// Regression: a storage write that failed was dropped. Storage is written only when it changes,
+// so nothing tried again, and after a reboot the stored creatures were gone (the Chronicle,
+// in the other blob, still listed them). A failed write now stays pending until it lands.
+TEST(a_failed_storage_write_is_retried_until_it_lands) {
+  Rng rng{5};
+  Config cfg;
+  World w;
+  w.startKitten();
+  w.kv.failWrites = 1000;               // the flash refuses every write for now
+  w.evolveAt(16);
+  CHECK_EQ(w.pet.storageCount(), 1);    // the keepsake is there in memory...
+  CHECK_EQ(w.kv.size("box"), 0u);       // ...but not saved yet
+  CHECK(w.pet.savePending());
+  w.kv.failWrites = 0;                  // the flash works again
+  w.pet.flushSave();                    // the next quiet moment (screen dimmed, off or asleep)
+  CHECK(!w.pet.savePending());
+  CHECK(w.kv.size("box") > 0u);
+  Pet p(kTheme, w.kv, rng, cfg);        // reboot
+  p.begin(5000);
+  CHECK_EQ(p.storageCount(), 1);
+  CHECK_EQ(p.stored(0).species, sid("kitten"));
+}
+
 TEST(ui_settings_persist_with_the_deferred_save) {
   MemKv kv;
   Rng rng{9};

@@ -15,6 +15,7 @@ class MemKv : public tama::KvStore {
     return it->second.size();
   }
   bool putBytes(const char *key, const void *buf, size_t len) override {
+    if (failWrites > 0) { failWrites--; return false; }   // a full or failing flash
     m_[key].assign((const uint8_t *)buf, (const uint8_t *)buf + len);
     writes++;
     return true;
@@ -25,6 +26,7 @@ class MemKv : public tama::KvStore {
     return it == m_.end() ? 0 : it->second.size();
   }
   int writes = 0;
+  int failWrites = 0;   // the next N writes fail
 
  private:
   std::map<std::string, std::vector<uint8_t>> m_;

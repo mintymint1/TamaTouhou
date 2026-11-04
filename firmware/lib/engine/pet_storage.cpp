@@ -229,8 +229,9 @@ void Pet::saveStorage() {
   static uint8_t buf[kBoxMax];   // static: ~6.7 KB is too much for the ESP32 loop stack
   size_t n = writeStorage(buf, sizeof(buf));
   if (!n) return;
+  pendingBox_ = false;
   if (boxCount_ == 0) kv_.remove(kBoxKey);
-  else kv_.putBytes(kBoxKey, buf, n);
+  else if (!kv_.putBytes(kBoxKey, buf, n)) pendingBox_ = true;   // retried by flushSave()
 }
 
 size_t Pet::writeStorage(uint8_t *buf, size_t cap) const {

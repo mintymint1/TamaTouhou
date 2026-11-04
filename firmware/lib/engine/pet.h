@@ -251,8 +251,13 @@ class Pet {
   uint32_t takeEvents() { uint32_t e = events_; events_ = 0; return e; }
 
   // --- persistence (one versioned blob; NVS writes are slow, see platform.h)
-  bool savePending() const { return pendingSave_; }
-  void flushSave() { if (pendingSave_) save(); }
+  // A write the store refused (full, or a flash error) stays pending and is retried by
+  // flushSave(), so a failed write never silently loses the pet or the storage.
+  bool savePending() const { return pendingSave_ || pendingBox_; }
+  void flushSave() {
+    if (pendingSave_) save();
+    if (pendingBox_) saveStorage();
+  }
   void save();
 
   // --- save transfer (backup, or moving a pet between the board and the simulator).
@@ -371,6 +376,7 @@ class Pet {
   uint16_t newMedal_ = 0;
   uint8_t ticksSinceSave_ = 0;
   bool pendingSave_ = false;
+  bool pendingBox_ = false;   // the storage blob still has to be written (a write failed)
   uint32_t events_ = 0;
   bool wasEvoReady_ = false, wasRunReady_ = false;
   Specimen box_[kStorageMax];
